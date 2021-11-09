@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CovidViewer.Properties
+namespace CovidViewerClient.Properties
 {
 
 
