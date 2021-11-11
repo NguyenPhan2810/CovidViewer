@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CovidViewerClient.Properties {
+namespace CovidViewerServer.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -25,37 +25,49 @@ namespace CovidViewerClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool RememberPasswordCheckState {
+        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        public string IpAddress {
             get {
-                return ((bool)(this["RememberPasswordCheckState"]));
+                return ((string)(this["IpAddress"]));
             }
             set {
-                this["RememberPasswordCheckState"] = value;
+                this["IpAddress"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UsernameText {
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        public int Port {
             get {
-                return ((string)(this["UsernameText"]));
+                return ((int)(this["Port"]));
             }
             set {
-                this["UsernameText"] = value;
+                this["Port"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PasswordText {
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public float FetchInterval {
             get {
-                return ((string)(this["PasswordText"]));
+                return ((float)(this["FetchInterval"]));
             }
             set {
-                this["PasswordText"] = value;
+                this["FetchInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.3")]
+        public float StatusUpdateInterval {
+            get {
+                return ((float)(this["StatusUpdateInterval"]));
+            }
+            set {
+                this["StatusUpdateInterval"] = value;
             }
         }
     }

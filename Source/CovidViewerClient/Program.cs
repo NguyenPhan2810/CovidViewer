@@ -16,7 +16,15 @@ namespace CovidViewerClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CovidViewerServerForm());
+
+            try
+            {
+                Application.Run(new AuthenticationForm());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
         }
     }
 }

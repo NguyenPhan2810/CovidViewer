@@ -36,6 +36,7 @@
             this.checkBoxShowPassword = new System.Windows.Forms.CheckBox();
             this.checkBoxRememberPassword = new System.Windows.Forms.CheckBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.labelStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelUsername
@@ -65,6 +66,7 @@
             this.textBoxPassword.TabIndex = 2;
             this.textBoxPassword.Text = global::CovidViewerClient.Properties.Settings.Default.PasswordText;
             this.textBoxPassword.UseSystemPasswordChar = true;
+            this.textBoxPassword.TextChanged += new System.EventHandler(this.textBoxPassword_TextChanged);
             // 
             // buttonSignIn
             // 
@@ -119,12 +121,23 @@
             this.textBoxUsername.Size = new System.Drawing.Size(301, 20);
             this.textBoxUsername.TabIndex = 1;
             this.textBoxUsername.Text = global::CovidViewerClient.Properties.Settings.Default.UsernameText;
+            this.textBoxUsername.TextChanged += new System.EventHandler(this.textBoxUsername_TextChanged);
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(12, 97);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(105, 13);
+            this.labelStatus.TabIndex = 9;
+            this.labelStatus.Text = "Connecting to server";
             // 
             // AuthenticationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(438, 119);
+            this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.checkBoxRememberPassword);
             this.Controls.Add(this.checkBoxShowPassword);
             this.Controls.Add(this.buttonSignUp);
@@ -153,5 +166,6 @@
         private System.Windows.Forms.Button buttonSignUp;
         private System.Windows.Forms.CheckBox checkBoxShowPassword;
         private System.Windows.Forms.CheckBox checkBoxRememberPassword;
+        private System.Windows.Forms.Label labelStatus;
     }
 }
