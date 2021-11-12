@@ -19,8 +19,6 @@ namespace CovidViewerServer
 {
     public partial class CovidViewerServerForm : Form
     {
-        Thread listeningThread;
-
         CovidViewerServerSocket server;
 
         System.Windows.Forms.Timer statusTimer = new System.Windows.Forms.Timer();
@@ -51,11 +49,7 @@ namespace CovidViewerServer
         private void CovidViewerServerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             server.StopListening();
-
-            if (listeningThread.IsAlive)
-            {
-                listeningThread.Join();
-            }
+            
 
             Properties.Settings.Default.Save();
         }
@@ -65,17 +59,13 @@ namespace CovidViewerServer
             Properties.Settings.Default.Reload();
 
             server = new CovidViewerServerSocket(this,
-                Properties.Settings.Default.IpAddress,
                 Properties.Settings.Default.Port);
-
-            listeningThread = new Thread(server.StartListening);
-            listeningThread.Start();
+            
             
             statusTimer.Interval = (int)(Properties.Settings.Default.StatusUpdateInterval * 1000);
             statusTimer.Tick += StatusTimer_Tick;
             statusTimer.Start();
            
-            textBoxIp.Text = $"Ipv4: {server.Ipv4}";
         }
 
         private void buttonFetch_Click(object sender, EventArgs e)
@@ -86,6 +76,16 @@ namespace CovidViewerServer
         private void CovidViewerServerForm_Shown(object sender, EventArgs e)
         {
             server.StartListening();
+
+            new Thread(() =>
+            {
+                while (server.Ipv4 == "" || server.Ipv4 == null)
+                {
+                    Thread.Sleep(100);
+                }
+
+                textBoxIp.Invoke((Action)(() => textBoxIp.Text = $"Ipv4: {server.Ipv4}:{server.Port}"));
+            }).Start();
         }
     }
 
@@ -105,8 +105,8 @@ namespace CovidViewerServer
         Thread fetchThread = null;
         Thread listeningThread = null;
 
-        public CovidViewerServerSocket(CovidViewerServerForm theForm, string ip, int port)
-            : base(ip, port)
+        public CovidViewerServerSocket(CovidViewerServerForm theForm, int port)
+            : base(port)
         {
             try
             {

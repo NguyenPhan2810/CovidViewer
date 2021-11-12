@@ -37,9 +37,8 @@ namespace AsynchronousSocketHelper
         /// <returns> string that will be echoed to the client </returns>
         protected abstract void MessageReceived(string message, ClientHeader header, Socket handler);
         
-        public AsynchronousSocketServer(string ip, int port)
+        public AsynchronousSocketServer(int port)
         {
-            Ipv4 = ip;
             Port = port;
         }
 
@@ -53,8 +52,9 @@ namespace AsynchronousSocketHelper
             {
                 // Establish the local endpoint for the socket.  
                 // The DNS name of the computer  
-                // running the listener is "host.contoso.com".  
-                IPAddress ipAddress = IPAddress.Parse(Ipv4);
+
+                IPHostEntry ipHostEntry = Dns.Resolve(Dns.GetHostName());
+                IPAddress ipAddress = ipHostEntry.AddressList[0];
 
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, Port);
                 
@@ -67,7 +67,7 @@ namespace AsynchronousSocketHelper
                 listenerSocket.Bind(localEndPoint);
                 listenerSocket.Listen(100);
 
-                Ipv4 = listenerSocket.LocalEndPoint.ToString();
+                Ipv4 = ipAddress.MapToIPv4().ToString();
 
                 // Check for clients connection
                 var clientsTimer = new System.Timers.Timer(1000);
