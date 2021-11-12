@@ -210,9 +210,13 @@ namespace CovidViewerServer
                             {
                                 Send(handler, message, ServerHeader.SignInFailed);
                             }
-                            else
+                            else if (accounts[account.Username] == account.Password)
                             {
                                 Send(handler, message, ServerHeader.SignInSuccess);
+                            }
+                            else
+                            {
+                                Send(handler, message, ServerHeader.SignInFailed);
                             }
                             break;
                         }
