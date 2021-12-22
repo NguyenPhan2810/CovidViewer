@@ -12,7 +12,6 @@ using System.Windows.Forms;
 
 namespace CovidViewerClient
 {
-
     class CovidViewerClientSocket : AsynchronousSocketClient
     {
         protected AuthenticationForm authenForm = null;

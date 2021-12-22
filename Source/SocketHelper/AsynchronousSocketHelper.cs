@@ -240,7 +240,6 @@ namespace AsynchronousSocketHelper
         }
     }
 
-
     public abstract class AsynchronousSocketClient
     {
         // The port number for the remote device.  
